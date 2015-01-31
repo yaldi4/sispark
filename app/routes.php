@@ -16,4 +16,9 @@
 //	return View::make('hello');
 //});
 
-Route::controller('/','HomeController',['getIndex'=>'home.index']);
+Route::resource('admin/user', 'UserController');
+Route::resource('admin/pengendara', 'PengendaraController');
+Route::resource('admin/kendaraan', 'KendaraanController');
+Route::controller('operator', 'OperatorController', ['getMasuk'=>'op.masuk']);
+Route::controller('table', 'TableController', ['getUser'=>'api.user','getPengendara'=>'api.pengendara']);
+Route::controller('/','HomeController',['getIndex'=>'home.index','postLogin'=>'home.login','getLogout'=>'home.logout']);

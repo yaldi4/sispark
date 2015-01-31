@@ -21,13 +21,16 @@
                 <h3 class="panel-title">Please Sign In</h3>
             </div>
             <div class="panel-body">
-                {{Form::open(array('route'=>'home.store','method'=>'post'))}}
+                {{Form::open(array('route'=>'home.login','method'=>'post'))}}
                 <fieldset>
                     <div class="form-group">
-                        {{Form::text('pengenal',Input::old('pengenal'),array('class'=>'form-control','placeholder'=>'NIM / NIP','autofocus'))}}
+                        {{Form::text('username',Input::old('username'),array('class'=>'form-control','placeholder'=>'Username','autofocus'))}}
                     </div>
                     <div class="form-group">
                         {{Form::password('password',array('class'=>'form-control','placeholder'=>'Password'))}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::select('role',array(''=>'Pilih','admin'=>'Admin','operator'=>'Operator' ),Input::old('tipe'), array('class' => 'form-control input-md'))}}
                     </div>
                     <div class="checkbox">
                         <label>
@@ -41,13 +44,8 @@
                 </fieldset>
                 {{Form::close()}}
             </div>
-            <div class="panel-heading">
-                <h3 class="panel-title">Belum Terdaftar?</h3>
-            </div>
-            <div class="panel-body">
-                <p><a href="" class="btn btn-primary btn-lg btn-block" role="button">Mendaftar</a> </p>
-            </div>
         </div>
+    </div>
         @stop
 @section('footer')
     @parent
