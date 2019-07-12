@@ -30,7 +30,7 @@
                         {{Form::password('password',array('class'=>'form-control','placeholder'=>'Password'))}}
                     </div>
                     <div class="form-group">
-                        {{Form::select('role',array(''=>'Pilih','admin'=>'Admin','operator'=>'Operator' ),Input::old('tipe'), array('class' => 'form-control input-md'))}}
+                        {{Form::select('role',array(''=>'Pilih','Operator Masuk'=>'operator masuk','Operator Keluar'=>'operator keluar' ),Input::old('tipe'), array('class' => 'form-control input-md'))}}
                     </div>
                     <div class="checkbox">
                         <label>

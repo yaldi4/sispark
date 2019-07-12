@@ -36,18 +36,30 @@ class HomeController extends BaseController {
 		$user->username 	= $username;
 		$user->password 	= $password;
 		$user->role 	= $role;
-		$userdata = array('username'=>$username,'password'=>$password,'role'=>$role);
-		var_dump($user->isValid('logging_in'));
-		var_dump($user->toArray());
-//		if (! $user->isValid('logging_in')) {
-//			return 'false';
-//		} else {
-//			if (Auth::attempt($userdata,$remember)) {
-//				return 'berharil';
-//			} else {
-//				return 'salah username or password';
-//			}
-//		}
+		$userdata = array('username'=>$username,'password'=>$password);
+//		var_dump($user->isValid('logging_in'));
+//		var_dump($user->toArray());
+		if (! $user->isValid('logging_in')) {
+			return 'false';
+		} else {
+			if (Auth::attempt($userdata,$remember)) {
+				$authrole =  Auth::user()->role;
+				if ($authrole == 'admin')return Redirect::route('admin.pengendara.index');
+                if ($authrole == 'operator') {
+                    if ($user->role == 'Operator Masuk') {
+                        Event::fire('operator.login',array($user));
+                        return Redirect::route('op.getmasuk');
+                    } elseif ($user->role == 'Operator Keluar') {
+                        Event::fire('operator.login',array($user));
+                        return Redirect::route('op.getkeluar');
+                    } else {
+                        return 'Pilih salah satu operator';
+                    }
+                }
+			} else {
+				return 'salah username or password';
+			}
+		}
 
 	}
 

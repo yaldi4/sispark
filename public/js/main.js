@@ -15,6 +15,7 @@ var main = function () {
 
     });
 
+    var btninfo = $('#linkpost');
     var formdelete = $('#form-delete-user');
     var url = formdelete.attr('action');
     usertable.on('click', 'button[data-userdel]', function () {
@@ -52,8 +53,80 @@ var main = function () {
     });
 
     $('#datetimepicker1').datetimepicker({
-        pickTime: false,
+        locale: 'id',
+        format: 'YYYY-MM-D',
         defaultDate: "2014-04-24"
+    });
+    var awalpicker = $('#datetimepicker6');
+    awalpicker.datetimepicker({
+        locale: 'id',
+        format: 'YYYY-MM-D HH:m:ss'
+    });
+    var akhirpicker = $('#datetimepicker7');
+    akhirpicker.datetimepicker({
+        locale: 'id',
+        format: 'YYYY-MM-D HH:m:ss'
+    });
+    awalpicker.on("dp.change",function (e) {
+        akhirpicker.data("DateTimePicker").minDate(e.date);
+    });
+    akhirpicker.on("dp.change",function (e) {
+        awalpicker.data("DateTimePicker").maxDate(e.date);
+    });
+
+
+    btninfo.on('click', function (event) {
+        event.preventDefault();
+        var btn = $(this);
+        var bar = btn.data('info');
+        $.ajax({
+            url: 'http://'+window.location.host+'/admin/riwayat/parkir',
+            type:'POST',
+            dataType:'JSON',
+            data:bar,
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+    //$('#parkirtable').dataTable().fnDraw();
+    $("#filter").on('click', function (event) {
+        event.preventDefault();
+
+        var btn = $(this);
+        var awal = awalpicker.find("input").val();
+        var akhir = akhirpicker.find("input").val();
+        $.post('http://'+window.location.host+'/admin/riwayat/parkir',
+            {
+                awal: awal,
+                akhir: akhir
+            },
+            function(data,status){
+                //alert("Data: " + data + "\nStatus: " + status);
+                if (status == 'success') {
+                    $('#parkirtable').dataTable().fnDraw();
+                }
+            });
+    });
+    $("#download").on('click', function (event) {
+        event.preventDefault();
+
+        var btn = $(this);
+        var awal = awalpicker.find("input").val();
+        var akhir = akhirpicker.find("input").val();
+        $.post('http://'+window.location.host+'/admin/riwayat/parkir',
+            {
+                awal: awal,
+                akhir: akhir
+            },
+            function(data,status){
+                //alert("Data: " + data + "\nStatus: " + status);
+                if (status == 'success') {
+                    location.href = '/admin/riwayat/download';
+                }
+            });
+
     });
 
 };

@@ -8,7 +8,7 @@
             <a href="{{Route('admin.pengendara.index')}}">Data Pengendara</a>
         </li>
         <li>
-            <a href="">Riwayat Parkir</a>
+            <a href="{{Route('ad.getparkir')}} ">Riwayat Parkir</a>
         </li>
     </ul>
     <!-- /.nav-second-level -->
@@ -19,9 +19,9 @@
         <li>
             <a href="{{Route('admin.user.index')}}">Data User</a>
         </li>
-        {{--<li>
-            <a href="{{Route('admin.showriwayatoperator')}} ">Riwayat Operator</a>
-        </li>--}}
+        <li>
+            <a href="{{Route('ad.getlog')}} ">Riwayat Operator</a>
+        </li>
     </ul>
     <!-- /.nav-second-level -->
 </li>

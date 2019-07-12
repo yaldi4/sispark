@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('head')
     @parent
-    {{ HTML::style('css/bootstrap-datetimepicker.min.css') }}
+    {{--{{ HTML::style('css/bootstrap-datetimepicker.min.css') }}--}}
 @stop
 @section('content')
     <div class="row">
@@ -37,7 +37,7 @@
                 <div class="form-group">
                     {{Form::label('tgl_lahir', 'TGL Lahir',array('class' => 'col-md-4 control-label'))}}
                     <div class="col-md-4">
-                        <div class='input-group date' id='datetimepicker1' data-date-format="YYYY-MM-DD"/>
+                        <div class='input-group date' id='datetimepicker1'/>
                         {{Form::text('tgl_lahir',Input::old('tgl_lahir'),array('class'=>'form-control input-md'))}}
                         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -80,6 +80,6 @@
 @stop
 @section('footer')
     {{ HTML::script('js/moment.min.js') }}
-    {{ HTML::script('js/bootstrap-datetimepicker.min.js') }}
+    {{--{{ HTML::script('js/bootstrap-datetimepicker.min.js') }}--}}
     @parent
 @stop

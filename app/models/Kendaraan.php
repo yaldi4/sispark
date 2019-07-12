@@ -13,11 +13,16 @@ class Kendaraan extends \Eloquent {
 		'warna'				=> 'required'
 	];
 	protected $fillable = [];
-	protected  $guarded = ['id','created_at','updated_ate'];
+	protected  $guarded = ['id','created_at','updated_at'];
 	protected $table = 'kendaraan';
 
 	public function pengendara()
 	{
-		$this->belongsTo('User');
+		return $this->belongsTo('Pengendara');
+	}
+
+	public function transaksi()
+	{
+		return $this->hasMany('Transaksi','kendaraan_id');
 	}
 }

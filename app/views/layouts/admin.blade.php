@@ -12,9 +12,23 @@
         {{ HTML::style('css/sb-admin-2.css') }}
         {{ HTML::style('css/font-awesome.min.css') }}
         {{ HTML::style('css/pnotify.custom.min.css') }}
+        {{ HTML::style('css/datetimepicker4.css') }}
         {{ HTML::script('js/jquery-1.8.3.min.js') }}
-        {{--<script src="http://{{$_SERVER['SERVER_NAME']}}:1337/socket.io/socket.io.js"></script>--}}
-
+        <script src="http://{{$_SERVER['SERVER_NAME']}}:1337/socket.io/socket.io.js"></script>
+        <script> function postwith (to,p) {
+                var myForm = document.createElement("form");
+                myForm.method="post" ;
+                myForm.action = to ;
+                for (var k in p) {
+                    var myInput = document.createElement("input") ;
+                    myInput.setAttribute("name", k) ;
+                    myInput.setAttribute("value", p[k]);
+                    myForm.appendChild(myInput) ;
+                }
+                document.body.appendChild(myForm) ;
+                myForm.submit() ;
+                document.body.removeChild(myForm) ;
+            }</script>
     @show
     <title>{{$title or 'Document'}} </title>
 </head>
@@ -34,8 +48,8 @@
             <!-- /.dropdown -->
 
             <!-- /.dropdown -->
-            {{--@include('admin.widget.notif')
-            @include('admin.widget.nav')--}}
+            @include('admin.widget.notif')
+            @include('admin.widget.nav')
             <!-- /.dropdown -->
         </ul>
         <div class="navbar-default sidebar" role="navigation">
@@ -58,9 +72,12 @@
         {{ HTML::script('js/sb-admin-2.js')}}
         {{ HTML::script('js/metisMenu.min.js')}}
         {{ HTML::script('js/pnotify.custom.min.js')}}
-        {{ HTML::script('js/main.js') }}
+        {{ HTML::script('js/moment.2.9.js') }}
         {{ HTML::script('js/timeago.js') }}
+        {{ HTML::script('js/datetimepicker4.js') }}
+        {{ HTML::script('js/notif.js') }}
         <script > $("abbr.timeago").timeago();</script>
+        {{ HTML::script('js/main.js') }}
     @show
 </div>
 </body>
